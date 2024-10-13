@@ -1,7 +1,15 @@
+# C:\SCRIPTS_INFNET\RD5_Projeto\Livro\Teste\main.py
+
 from fastapi import FastAPI
+from routers import product
+
 
 app = FastAPI()
 
+app.include_router(product.router, prefix="/products", tags=["products"])
+
 @app.get("/")
-async def root():
-    return {"greeting": "Hello, World!", "message": "Welcome to FastAPI!"}
+def read_root():
+    return {"message": "Bem-vindo ao CRUD de Produtos com FastAPI e MongoDB Atlas"}
+
+
