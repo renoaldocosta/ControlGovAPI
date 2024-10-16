@@ -18,42 +18,8 @@ load_dotenv()
 
 app = FastAPI(
     title="API - ControlGov - Câmara Municipal de Pinhão/SE",
-    summary="Uma aplicação de exemplo mostrando como usar FastAPI para adicionar uma ReST API a uma coleção do MongoDB.",
-    description="""
-    ## API - ControlGov
-
-    Esta API permite a gestão de empenhos detalhados para a Câmara Municipal de Pinhão/SE. 
-    Com ela, é possível criar, listar, visualizar, atualizar e deletar registros de empenhos.
-
-    ### Funcionalidades
-
-    - **Criar Empenho**: Adicione novos registros de empenho.
-    - **Listar Empenhos**: Recupere uma lista de todos os empenhos.
-    - **Visualizar Empenho**: Obtenha detalhes de um empenho específico.
-    - **Atualizar Empenho**: Atualize informações de um empenho existente.
-    - **Deletar Empenho**: Remova um empenho do sistema.
-
-    ### Autenticação
-
-    {Private-Key}
-
-    ### Contato
-
-    Para mais informações, entre em contato através do e-mail: contato@controlgov.org
-    """,
-    version="1.0.0",
-    terms_of_service="https://www.controlgov.org/terms/",
-    contact={
-        "name": "Equipe de Suporte ControlGov",
-        "url": "https://www.controlgov.org/contact/",
-        "email": "contato@controlgov.org",
-    },
-    license_info={
-        "name": "MIT License",
-        "url": "https://opensource.org/licenses/MIT",
-    }
+    summary="Serviço de aplicação para gestão interna e controle de despesas da Câmara Municipal de Pinhão/SE.",
 )
-
 client: motor.motor_asyncio.AsyncIOMotorClient = motor.motor_asyncio.AsyncIOMotorClient(os.environ["MONGODB_URL"])
 db = client.get_database("CMP")
 empenho_collection = db.get_collection("EMPENHOS_DETALHADOS_STAGE")
