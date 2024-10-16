@@ -18,6 +18,7 @@ load_dotenv()
 
 app = FastAPI(
     title="API - ControlGov - Câmara Municipal de Pinhão/SE",
+    version="1.0.1"
     summary="Serviço de aplicação para gestão interna e controle de despesas da Câmara Municipal de Pinhão/SE.",
 )
 client: motor.motor_asyncio.AsyncIOMotorClient = motor.motor_asyncio.AsyncIOMotorClient(os.environ["MONGODB_URL"])
