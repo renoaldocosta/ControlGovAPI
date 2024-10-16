@@ -3,12 +3,13 @@
 import os
 from motor.motor_asyncio import AsyncIOMotorClient
 from bson import ObjectId
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 # Conexão com o MongoDB Atlas
-MONGO_DETAILS = os.getenv("MONGO_DETAILS", "mongodb+srv://renoaldo_teste:zfUsBhhQFvz5hnEV@cluster0.zmdkz1p.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-
-client: AsyncIOMotorClient = AsyncIOMotorClient(MONGO_DETAILS)
+client: AsyncIOMotorClient =AsyncIOMotorClient(os.environ["MONGODB_URL"])
 
 database = client.livro  # Nome do banco de dados
 
