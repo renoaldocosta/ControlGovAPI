@@ -7,4 +7,10 @@ app = FastAPI(
     summary="Serviço de aplicação para gestão interna e controle de despesas da Câmara Municipal de Pinhão/SE.",
 )
 
+
+@app.get("/", tags=["Root"])
+async def read_root():
+    return {"message": "API - ControlGov - Câmara Municipal de Pinhão/SE"}
+
 app.include_router(empenho)
+
