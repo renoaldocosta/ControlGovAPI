@@ -1,27 +1,21 @@
-# C:\SCRIPTS_INFNET\RD5_Projeto\Livro\Teste\database.py
-
 import os
 from motor.motor_asyncio import AsyncIOMotorClient
 from bson import ObjectId
 from dotenv import load_dotenv
+import motor.motor_asyncio
+
 
 load_dotenv()
 
-
 # Conexão com o MongoDB Atlas
-client: AsyncIOMotorClient =AsyncIOMotorClient(os.environ["MONGODB_URL"])
+client = motor.motor_asyncio.AsyncIOMotorClient(os.environ["MONGODB_URL"])
 
-database = client.livro  # Nome do banco de dados
+if client is None:
+	raise ValueError("Failed to create a MongoDB client")
 
-# Coleções
-product_collection = database.get_collection("products")
+# Seleciona o banco de dados e a coleção
+db = client["CMP"]
 
-# Função para converter documentos do MongoDB para dicionário com id como string
-def product_helper(product) -> dict:
-    return {
-        "id": str(product["_id"]),
-        "name": product["name"],
-        "description": product.get("description", ""),
-        "price": product["price"],
-        "quantity": product["quantity"],
-    }
+# Coleção de empenhos
+empenho_collection = db.get_collection("EMPENHOS_DETALHADOS_STAGE")
+
