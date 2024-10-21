@@ -17,6 +17,46 @@ from bson import ObjectId
 # It will be represented as a `str` on the model so that it can be serialized to JSON.
 PyObjectId = Annotated[str, BeforeValidator(str)]
 
+
+class SubelementoEmpenhadoSum(BaseModel):
+    subelemento: str
+    total_empenhado: float
+
+class SubelementoEmpenhadoSumCollection(BaseModel):
+    subelementos: List[SubelementoEmpenhadoSum]
+
+class SubelementoAnoMesEmpenhadoSum(BaseModel):
+    subelemento: str
+    ano: int
+    mes: int
+    total_empenhado: float
+
+class SubelementoAnoMesEmpenhadoSumCollection(BaseModel):
+    subelementos: List[SubelementoAnoMesEmpenhadoSum]
+
+# =================================================================================================
+
+class ElementoDespesaAnoMesEmpenhadoSum(BaseModel):
+    elemento_de_despesa: str
+    ano: int
+    mes: int
+    total_empenhado: float
+
+class ElementoDespesaAnoMesEmpenhadoSumCollection(BaseModel):
+    elementos: List[ElementoDespesaAnoMesEmpenhadoSum]
+    
+
+class ElementoDespesaEmpenhadoSum(BaseModel):
+    elemento_de_despesa: str
+    total_empenhado: float
+
+class ElementoDespesaEmpenhadoSumCollection(BaseModel):
+    elementos: List[ElementoDespesaEmpenhadoSum]
+
+
+
+# =================================================================================================
+
 class CredoresCollection(BaseModel):
     credores: List[str]
 
@@ -27,6 +67,8 @@ class CredorEmpenhadoSum(BaseModel):
 class CredorEmpenhadoSumCollection(BaseModel):
     credores: List[CredorEmpenhadoSum]
 
+
+# =================================================================================================
 class EmpenhoModel(BaseModel):
     """
     Container for a single empenho record.

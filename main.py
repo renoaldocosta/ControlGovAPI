@@ -1,6 +1,8 @@
 from fastapi import FastAPI, HTTPException
 from routers.empenhos import empenho
 from routers.credores import credor
+from routers.elementos import elemento
+from routers.subelementos import subelemento
 import requests
 
 app = FastAPI(
@@ -16,6 +18,8 @@ async def read_root():
 
 app.include_router(credor)
 app.include_router(empenho)
+app.include_router(elemento)
+app.include_router(subelemento)
 
 
 def obter_ip(formato: str):
@@ -31,7 +35,7 @@ def obter_ip(formato: str):
     except requests.exceptions.RequestException as e:
         return None  # Retorna None se não for possível obter o IP
 
-@app.get("/ip")
+@app.get("/ip", include_in_schema=False)
 def mostrar_ip():
     ipv4 = obter_ip("ipv4")
     ipv6 = obter_ip("ipv6")

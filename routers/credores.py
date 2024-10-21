@@ -1,23 +1,8 @@
-import os
-from dotenv import load_dotenv
-from typing import Optional, List, Any
-
-from fastapi import FastAPI, Body, HTTPException, status, APIRouter
-from fastapi.responses import Response
-from pydantic import BaseModel, Field
-from pydantic.functional_validators import BeforeValidator
-
-from typing_extensions import Annotated
-
-from bson import ObjectId
+from fastapi import  HTTPException, APIRouter
 
 from models import CredoresCollection, CredorEmpenhadoSumCollection, CredorEmpenhadoSum
 
 from database import empenho_collection
-
-from pymongo import ReturnDocument
-
-empenho = APIRouter()
 
 credor = APIRouter()
 
