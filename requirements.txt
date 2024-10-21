@@ -47,3 +47,5 @@ uvicorn==0.28.0
     # via -r requirements.in
 hypercorn
 python-dotenv
+types-requests
+requests

@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from routers.empenhos import empenho
 from routers.credores import credor
 import requests
@@ -22,9 +22,9 @@ def obter_ip(formato: str):
     """Obtém o IP no formato especificado ('ipv4' ou 'ipv6')."""
     try:
         if formato == "ipv4":
-            resposta = requests.get("https://api.my-ip.io/ip.json")
+            resposta = requests.get("https://api.my-ip.io/ip.json", timeout=10)
         elif formato == "ipv6":
-            resposta = requests.get("https://api64.ipify.org?format=json")
+            resposta = requests.get("https://api64.ipify.org?format=json", timeout=10)
 
         resposta.raise_for_status()
         return resposta.json().get("ip")
