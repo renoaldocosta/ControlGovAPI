@@ -1,13 +1,6 @@
-import os
-from dotenv import load_dotenv
-from typing import Optional, List, Any
 
-from fastapi import FastAPI, Body, HTTPException, status, APIRouter
+from fastapi import Body, HTTPException, status, APIRouter
 from fastapi.responses import Response
-from pydantic import BaseModel, Field
-from pydantic.functional_validators import BeforeValidator
-
-from typing_extensions import Annotated
 
 from bson import ObjectId
 
@@ -84,6 +77,7 @@ async def show_empenho(id: str):
     response_model=EmpenhoModel,
     response_model_by_alias=False,
     tags=["Empenhos"],
+    include_in_schema=False,
 )
 async def update_empenho(id: str, empenho: UpdateEmpenhoModel = Body(...)):
     """
@@ -114,7 +108,7 @@ async def update_empenho(id: str, empenho: UpdateEmpenhoModel = Body(...)):
     raise HTTPException(status_code=404, detail=f"Empenho {id} not found")
 
 
-@empenho.delete("/empenhos/{id}", response_description="Delete a empenho",tags=["Empenhos"],)
+@empenho.delete("/empenhos/{id}", response_description="Delete a empenho",tags=["Empenhos"],include_in_schema=False,)
 async def delete_empenho(id: str):
     """
     Remove a single empenho record from the database.
