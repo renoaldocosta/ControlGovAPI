@@ -17,6 +17,15 @@ from bson import ObjectId
 # It will be represented as a `str` on the model so that it can be serialized to JSON.
 PyObjectId = Annotated[str, BeforeValidator(str)]
 
+class CredoresCollection(BaseModel):
+    credores: List[str]
+
+class CredorEmpenhadoSum(BaseModel):
+    credor: str
+    total_empenhado: float
+
+class CredorEmpenhadoSumCollection(BaseModel):
+    credores: List[CredorEmpenhadoSum]
 
 class EmpenhoModel(BaseModel):
     """

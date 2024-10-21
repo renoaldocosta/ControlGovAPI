@@ -17,5 +17,6 @@ if client is None:
 db = client["CMP"]
 
 # Coleção de empenhos
-empenho_collection = db.get_collection("EMPENHOS_DETALHADOS_STAGE")
+empenho_collection_stage = db.get_collection("EMPENHOS_DETALHADOS_STAGE")
+empenho_collection = db.get_collection("EMPENHOS_DETALHADOS")
 

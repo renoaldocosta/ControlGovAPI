@@ -13,12 +13,11 @@ from bson import ObjectId
 
 from models import EmpenhoModel, EmpenhoCollection, UpdateEmpenhoModel
 
-from database import empenho_collection
+from database import empenho_collection_stage
 
 from pymongo import ReturnDocument
 
 empenho = APIRouter()
-
 
 
 @empenho.post(
@@ -35,10 +34,10 @@ async def create_empenho(empenho: EmpenhoModel = Body(...)):
 
     A unique `id` will be created and provided in the response.
     """
-    new_empenho = await empenho_collection.insert_one(
+    new_empenho = await empenho_collection_stage.insert_one(
         empenho.model_dump(by_alias=True, exclude={"id"})
     )
-    created_empenho = await empenho_collection.find_one(
+    created_empenho = await empenho_collection_stage.find_one(
         {"_id": new_empenho.inserted_id}
     )
     return created_empenho
@@ -57,7 +56,7 @@ async def list_empenhos():
 
     The response is unpaginated and limited to 1000 results.
     """
-    return EmpenhoCollection(empenhos=await empenho_collection.find().to_list(1000))
+    return EmpenhoCollection(empenhos=await empenho_collection_stage.find().to_list(1000))
 
 
 @empenho.get(
@@ -72,7 +71,7 @@ async def show_empenho(id: str):
     Get the record for a specific empenho, looked up by `id`.
     """
     if (
-        empenho := await empenho_collection.find_one({"_id": ObjectId(id)})
+        empenho := await empenho_collection_stage.find_one({"_id": ObjectId(id)})
     ) is not None:
         return empenho
 
@@ -98,7 +97,7 @@ async def update_empenho(id: str, empenho: UpdateEmpenhoModel = Body(...)):
     }
 
     if len(empenho_dict) >= 1:
-        update_result = await empenho_collection.find_one_and_update(
+        update_result = await empenho_collection_stage.find_one_and_update(
             {"_id": ObjectId(id)},
             {"$set": empenho},
             return_document=ReturnDocument.AFTER,
@@ -109,7 +108,7 @@ async def update_empenho(id: str, empenho: UpdateEmpenhoModel = Body(...)):
             raise HTTPException(status_code=404, detail=f"Empenho {id} not found")
 
     # The update is empty, but we should still return the matching document:
-    if (existing_empenho := await empenho_collection.find_one({"_id": id})) is not None:
+    if (existing_empenho := await empenho_collection_stage.find_one({"_id": id})) is not None:
         return existing_empenho
 
     raise HTTPException(status_code=404, detail=f"Empenho {id} not found")
@@ -120,7 +119,7 @@ async def delete_empenho(id: str):
     """
     Remove a single empenho record from the database.
     """
-    delete_result = await empenho_collection.delete_one({"_id": ObjectId(id)})
+    delete_result = await empenho_collection_stage.delete_one({"_id": ObjectId(id)})
 
     if delete_result.deleted_count == 1:
         return Response(status_code=status.HTTP_204_NO_CONTENT)

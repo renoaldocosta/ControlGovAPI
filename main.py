@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from routers.empenhos import empenho
+from routers.credores import credor
 
 app = FastAPI(
     title="API - ControlGov - Câmara Municipal de Pinhão/SE",
@@ -12,5 +13,7 @@ app = FastAPI(
 async def read_root():
     return {"message": "API - ControlGov - Câmara Municipal de Pinhão/SE"}
 
+app.include_router(credor)
 app.include_router(empenho)
+
 
