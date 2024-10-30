@@ -1,6 +1,6 @@
 # C:\SCRIPTS_INFNET\RD5_Projeto\Livro\Teste\models.py
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ValidationError
 from typing import Optional
 
 from typing import Optional, List, Any
@@ -16,6 +16,7 @@ from bson import ObjectId
 # Represents an ObjectId field in the database.
 # It will be represented as a `str` on the model so that it can be serialized to JSON.
 PyObjectId = Annotated[str, BeforeValidator(str)]
+
 
 
 class SubelementoEmpenhadoSum(BaseModel):

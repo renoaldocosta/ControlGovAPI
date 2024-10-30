@@ -3,6 +3,7 @@ from routers.empenhos import empenho
 from routers.credores import credor
 from routers.elementos import elemento
 from routers.subelementos import subelemento
+from routers.embeddings_subelementos import embeddings_subelemento
 import requests
 
 app = FastAPI(
@@ -20,6 +21,7 @@ app.include_router(credor)
 app.include_router(empenho)
 app.include_router(elemento)
 app.include_router(subelemento)
+app.include_router(embeddings_subelemento)
 
 
 def obter_ip(formato: str):

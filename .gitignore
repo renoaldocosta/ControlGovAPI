@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 notebook.ipynb
+main2.py
+main3.py
 
 # C extensions
 *.so
