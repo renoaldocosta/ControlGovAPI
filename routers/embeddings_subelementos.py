@@ -17,7 +17,7 @@ llm = OpenAI(model="gpt-3.5-turbo-instruct",temperature=0.2)
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 
-@embeddings_subelemento.post("/consulta", response_model=ConsultaResponse, tags=["Embeddings"])
+@embeddings_subelemento.post("/embeddings/subelementos", response_model=ConsultaResponse, tags=["Embeddings"],response_description="Answer for query about Subelementos",)
 def consulta_pinecone_api(request: ConsultaRequest):
     query = request.query
     secret = request.secret
