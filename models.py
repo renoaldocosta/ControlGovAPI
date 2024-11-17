@@ -19,6 +19,32 @@ PyObjectId = Annotated[str, BeforeValidator(str)]
 
 
 
+
+
+
+
+# ============== LOCAL LLM ==============
+
+
+class AutoCompleteModel(BaseModel):
+    phrase: str
+    
+    
+class ChatModel(BaseModel):
+    message: str
+    
+class ChatResponseModel(BaseModel):
+    assistant: str
+
+
+
+
+
+
+
+
+
+# ============ SUBELEMENTOS ============
 class SubelementoEmpenhadoSum(BaseModel):
     subelemento: str
     total_empenhado: float

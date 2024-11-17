@@ -4,6 +4,7 @@ from routers.credores import credor
 from routers.elementos import elemento
 from routers.subelementos import subelemento
 from routers.embeddings_subelementos import embeddings_subelemento
+from routers.local_llm import llm_local_router
 import requests
 
 app = FastAPI(
@@ -17,11 +18,13 @@ app = FastAPI(
 async def read_root():
     return {"message": "API - ControlGov - Câmara Municipal de Pinhão/SE"}
 
+
 app.include_router(credor)
 app.include_router(empenho)
 app.include_router(elemento)
 app.include_router(subelemento)
 app.include_router(embeddings_subelemento)
+app.include_router(llm_local_router)
 
 
 def obter_ip(formato: str):
@@ -37,6 +40,7 @@ def obter_ip(formato: str):
     except requests.exceptions.RequestException as e:
         return None  # Retorna None se não for possível obter o IP
 
+
 @app.get("/ip", include_in_schema=False)
 def mostrar_ip():
     ipv4 = obter_ip("ipv4")
@@ -48,5 +52,5 @@ def mostrar_ip():
     # Prioriza IPv4, mas inclui IPv6 se disponível
     return {
         "ip_publico_ipv4": ipv4 or "Não disponível",
-        "ip_publico_ipv6": ipv6 or "Não disponível"
+        "ip_publico_ipv6": ipv6 or "Não disponível",
     }
