@@ -61,5 +61,5 @@ langchain-openai
 tiktoken==0.8.0
 
 transformers
-types-transformers
+# types-transformers
 torch
