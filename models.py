@@ -25,6 +25,11 @@ PyObjectId = Annotated[str, BeforeValidator(str)]
 
 # ============== LOCAL LLM ==============
 
+class ChatResponseModelWithInformations(BaseModel):
+    processed_text: str
+    task_type: str
+    assistant: str
+
 
 class AutoCompleteModel(BaseModel):
     phrase: str
